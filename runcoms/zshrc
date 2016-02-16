@@ -10,4 +10,23 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+unsetopt CORRECT
+
 # Customize to your needs...
+# alias
+alias u:='cd ~/Ilegra/unicred'
+alias i:='cd ~/Ilegra'
+alias gs='echo NO GHOSTSCRIPT!'
+
+# NVM
+export NVM_DIR="/home/owl/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# RVM
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# PYENV
+export PATH="/home/owl/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
