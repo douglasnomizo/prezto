@@ -1,32 +1,35 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-unsetopt CORRECT
-
-# Customize to your needs...
 # alias
 alias u:='cd ~/Ilegra/unicred'
 alias i:='cd ~/Ilegra'
 alias gs='echo NO GHOSTSCRIPT!'
 
-# NVM
-export NVM_DIR="/home/owl/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+### Disable commands
+unset SSH_ASKPASS
+unsetopt correct
+setopt rm_star_silent
+set -o ignoreeof
+
+#### Exports
 
 # RVM
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-# PYENV
-export PATH="/home/owl/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# NVM
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh"
 
+# JAVA
+export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.91-2.b14.fc23.x86_64"
+export EDITOR="vim"
+export PATH="$PATH:/opt"
+
+### Aliases
+alias i:="cd ~/Ilegra"
+alias u:="cd ~/Ilegra/unicred"
+alias s:="cd ~/Ilegra/sts"
+alias s="cd ~/Ilegra/study"
+alias gs="echo NO GHOSTSCRIPT!"
