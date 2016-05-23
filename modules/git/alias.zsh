@@ -10,9 +10,17 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 # Back-compatibility wrapper for when this function was defined here in
 # the plugin, before being pulled in to core lib/git.zsh as git_current_branch()
 # to fix the core -> git plugin dependency.
-function current_branch() {
-  git_current_branch
+function git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
 }
+
 # The list of remotes
 function current_repository() {
   if ! $_omz_git_git_cmd rev-parse --is-inside-work-tree &> /dev/null; then
